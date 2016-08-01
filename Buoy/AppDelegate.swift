@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import Parse
+import Bolts
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,7 +18,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        //Initialize Parse
+        
+        let configuration = ParseClientConfiguration {
+            $0.applicationId = "gcHEhpAUWdvLZNjWQnxr0CUh4lue9D5ppJf3fMCP"
+            $0.clientKey = "zzUTKfSVtxNwUbnqpmS1gwyAfST1EoZANL24MaBk"
+            $0.server = "https://buoy-parse-server.herokuapp.com/parse"
+        }
+        Parse.initializeWithConfiguration(configuration)
+        
         return true
     }
 
