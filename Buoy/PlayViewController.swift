@@ -14,14 +14,16 @@ class PlayViewController: UIViewController, AVAudioPlayerDelegate {
 
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
-    
     var audioPlayer: AVAudioPlayer!
+    
+    //ID of audio clip
     var audioID: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
+    //play sound of clip with ID audioID
     @IBAction func playSound(sender: UIButton) {
         let query = PFQuery(className:"Memo")
         query.getObjectInBackgroundWithId(audioID) {
@@ -54,6 +56,7 @@ class PlayViewController: UIViewController, AVAudioPlayerDelegate {
         }
     }
     
+    //stop playing sound
     @IBAction func stopSound(sender: UIButton){
         if audioPlayer != nil {
             audioPlayer.stop()

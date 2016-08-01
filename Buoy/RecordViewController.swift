@@ -16,9 +16,13 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate {
     @IBOutlet weak var stopButton: UIButton!
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
+    
+    //url of where audio lives once recorded
     var audioURL: NSURL!
+    //id of audio once saved to database
     var audioID: String!
     
+    //if has permission, allow recording ux
     override func viewDidLoad() {
         super.viewDidLoad()
         recordButton.enabled = false
@@ -50,6 +54,7 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate {
         return documentsDirectory
     }
     
+    //start recording to audioURL
     @IBAction func startRecording(sender: UIButton) {
         audioURL = NSURL(fileURLWithPath: getDocumentsDirectory()).URLByAppendingPathComponent("recording.m4a")
         
@@ -72,7 +77,7 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate {
         }
     }
 
-    
+    //stop recording and save clip from url to database
     @IBAction func finishRecording(sender: UIButton) {
         audioRecorder.stop()
         audioRecorder = nil
@@ -102,6 +107,7 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate {
         }
     }
     
+    //send id of audio to the playViewController so it can play the clip from there
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "playSound" {
             if let destination = segue.destinationViewController as? PlayViewController {
